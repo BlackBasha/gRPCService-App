@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option csharp_namespace="CustomerService.gRPC";
+
+
+service CustomerService 
+{
+	rpc  AddCustomer (CustomerPacket) returns (StatusResponse);
+}
+
+message StatusResponse
+{
+	ReadStatus Status=1;
+	string Message=2;
+
+}
+
+message CustomerPacket 
+{
+	repeated CustomerMessage CustomerMsg=1;
+}
+
+message CustomerMessage
+{
+	int32 Id=1;
+	string Name=2;
+	string Address=4;
+	reserved 3;  // this opetion is used when we want to change the message and we remove a property.
+				// in this case to keep the compitabiliy we keep the removed order so that no one willl use it and if sended this will not cause a problem
+}
+
+
+enum ReadStatus 
+{
+	Success=0; // should be started form 0
+	Failer=1;
+}

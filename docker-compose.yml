@@ -1,0 +1,9 @@
+version: '1.0'
+services:
+  ProductService:
+   image: ${DOCKER_REGISTRY-}customerservice:v1
+   build:
+    context: ./CustomerService
+    dockerfile: Dockerfile
+   ports:
+    - "5263:80"
